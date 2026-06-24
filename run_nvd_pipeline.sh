@@ -47,3 +47,14 @@ find "$LOG_DIR" -name "nvd_pipeline_*.log" -mtime +30 -delete
 
 # 90日より古いレポートを削除
 find "$REPO_DIR/reports" -name "nvd_report_*.md" -mtime +90 -delete 2>/dev/null || true
+
+# レポートをGitHubにpush
+log "Pushing report to GitHub ..."
+git add reports/
+if git diff --cached --quiet; then
+    log "No new report to commit."
+else
+    git commit -m "report: NVD $(date +%Y-%m-%d)"
+    git push origin main
+fi
+

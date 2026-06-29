@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T08:59:05Z",
+  "generated_at": "2026-06-29T10:01:56Z",
   "total": 26,
   "summary": {
     "by_level": {
@@ -44,7 +44,7 @@
       "first_seen": "2026-05-29",
       "last_seen": "2026-06-29",
       "hit_count": 92,
-      "countries": "Local, Netherlands, United States",
+      "countries": "Netherlands, United States",
       "et_sig_count": 3,
       "et_msgs": [
         "ET WEB_SPECIFIC_APPS SAP Netweaver Unauthenticated File Upload Attempt (JSP Webshell) (CVE-2025-31324)",
@@ -344,7 +344,7 @@
       "first_seen": "2026-06-02",
       "last_seen": "2026-06-28",
       "hit_count": 13,
-      "countries": "Local, United States",
+      "countries": "United States",
       "et_sig_count": 5,
       "et_msgs": [
         "ET EXPLOIT Possible Microsoft Exchange RCE Inbound M1 (CVE-2021-34473)",

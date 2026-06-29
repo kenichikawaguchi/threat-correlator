@@ -2,32 +2,6 @@
 # nvd_latest_fetch.py
 import os, sqlite3, requests, datetime, time, random
 
-# ── .env 読み込み（手動実行時のフォールバック）────────────────────────────
-def _load_dotenv():
-    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
-    if not os.path.exists(env_path):
-        return
-    with open(env_path) as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith("#"):
-                continue
-            # "export KEY=VALUE" 形式にも対応
-            line = line.removeprefix("export").strip()
-            if "=" not in line:
-                continue
-            key, _, val = line.partition("=")
-            val = val.strip().strip('"').strip("'")
-            os.environ.setdefault(key.strip(), val)
-
-_load_dotenv()
-# ─────────────────────────────────────────────────────────────────────────────
-
-
-import os, sqlite3, requests, datetime, time, random
-
-API_KEY = os.environ.get("NVD_API_KEY")
-
 MAX_RETRIES = 5
 RETRYABLE_STATUS = {429, 500, 502, 503, 504}
 
@@ -329,15 +303,11 @@ def circl_extract_summary(item: dict) -> dict:
 
 
 def _parse_ts(ts: str) -> Optional[datetime.datetime]:
-    """タイムスタンプ文字列をUTC naive datetimeに変換。失敗時はNone。
-    タイムゾーン情報がない場合（CIRCLのPublishedフィールド等）はUTCとして扱う。"""
+    """タイムスタンプ文字列をUTC datetimeに変換。失敗時はNone。"""
     if not ts:
         return None
     try:
         dt = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00"))
-        if dt.tzinfo is None:
-            # TZ情報なし → UTCとみなす（ローカルタイムに変換しない）
-            dt = dt.replace(tzinfo=datetime.timezone.utc)
         return dt.astimezone(datetime.timezone.utc).replace(tzinfo=None)
     except Exception:
         return None

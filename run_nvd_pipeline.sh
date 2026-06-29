@@ -40,6 +40,10 @@ if ! "$VENV" nvd_report.py >> "$LOG_FILE" 2>&1; then
     log "WARNING: nvd_report.py failed (exit $?). CVEs were fetched but report was not generated."
 fi
 
+# run_nvd_pipeline.sh 末尾に追記
+"$VENV" generate_zenn_article.py reports/cve_intel_$(date +%Y%m%d).json \
+    >> "$LOG_FILE" 2>&1 || true
+
 log "=== NVD pipeline done ==="
 
 # 30日より古いログを削除

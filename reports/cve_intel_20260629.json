@@ -1,0 +1,698 @@
+{
+  "generated_at": "2026-06-29T08:59:05Z",
+  "total": 26,
+  "summary": {
+    "by_level": {
+      "Critical": 13,
+      "High": 3,
+      "Unknown": 10
+    },
+    "by_vendor": {
+      "JetBrains": 2,
+      "Fortinet": 2,
+      "Microsoft": 2,
+      "Apache Software Foundation": 2,
+      "SAP_SE": 1,
+      "Ivanti": 1,
+      "ConnectWise": 1,
+      "Roundcube": 1,
+      "Cisco": 1,
+      "LiteSpeed Technologies": 1,
+      "WP Automatic": 1,
+      "Progress": 1,
+      "Grafana": 1,
+      "RocketGenius": 1,
+      "Adobe": 1,
+      "Apache": 1,
+      "Unknown": 1,
+      "Pulse": 1,
+      "Atlassian": 1,
+      "Jenkins Project": 1
+    }
+  },
+  "entries": [
+    {
+      "cve_id": "CVE-2025-31324",
+      "cvss": 10.0,
+      "cvss_level": "Critical",
+      "vendor": "SAP_SE",
+      "product": "SAP NetWeaver (Visual Composer development server)",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-434",
+      "description": "SAP NetWeaver Visual Composer Metadata Uploader is not protected with a proper authorization, allowing unauthenticated agent to upload potentially malicious executable binaries that could severely harm the host system. This could significantly affect the confidentiality, integrity, and availability of the targeted system.",
+      "first_seen": "2026-05-29",
+      "last_seen": "2026-06-29",
+      "hit_count": 92,
+      "countries": "Local, Netherlands, United States",
+      "et_sig_count": 3,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS SAP Netweaver Unauthenticated File Upload Attempt (JSP Webshell) (CVE-2025-31324)",
+        "ET EXPLOIT SAP NetWeaver Visual Composer Metadata Uploader Unauthenticated JSP File Upload (CVE-2025-31324)",
+        "ET HUNTING SAP NetWeaver Visual Composer Metadata Uploader Unauthenticated Arbitrary Command Execution (CVE-2025-31324)"
+      ],
+      "refs": [
+        "https://me.sap.com/notes/3594142",
+        "https://url.sap/sapsecuritypatchday"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-35078",
+      "cvss": 10.0,
+      "cvss_level": "Critical",
+      "vendor": "Ivanti",
+      "product": "Endpoint Manager Mobile",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": null,
+      "description": "An authentication bypass vulnerability in Ivanti EPMM allows unauthorized users to access restricted functionality or resources of the application without proper authentication.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS Possible Ivanti Endpoint Manager Mobile CVE-2023-35078 Check/Exploitation Attempt"
+      ],
+      "refs": [
+        "https://forums.ivanti.com/s/article/CVE-2023-35078-Remote-unauthenticated-API-access-vulnerability",
+        "https://forums.ivanti.com/s/article/KB-Remote-unauthenticated-API-access-vulnerability-CVE-2023-35078",
+        "https://www.cisa.gov/news-events/alerts/2023/07/24/ivanti-releases-security-updates-endpoint-manager-mobile-epmm-cve-2023-35078",
+        "https://www.ivanti.com/blog/cve-2023-35078-new-ivanti-epmm-vulnerability"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-1709",
+      "cvss": 10.0,
+      "cvss_level": "Critical",
+      "vendor": "ConnectWise",
+      "product": "ScreenConnect",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-288",
+      "description": "ConnectWise ScreenConnect 23.9.7 and prior are affected by an Authentication Bypass Using an Alternate Path or Channel\n\n vulnerability, which may allow an attacker direct access to confidential information or \n\ncritical systems.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 5,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS ConnectWise ScreenConnect - Attempted SetupWizard Auth Bypass CWE-288 (CVE-2024-1709)",
+        "ET WEB_SPECIFIC_APPS ConnectWise ScreenConnect - Successful SetupWizard Auth Bypass CWE-288 (CVE-2024-1709)",
+        "ET WEB_SPECIFIC_APPS ConnectWise ScreenConnect - SetupWizard Auth Bypass Vulnerable Version Detected (CVE-2024-1709 CVE-2024-1708)",
+        "ET WEB_SPECIFIC_APPS ConnectWise ScreenConnect - Attempted User Creation via SetupWizard with Auth Bypass CWE-288 (CVE-2024-1709)",
+        "ET WEB_SPECIFIC_APPS ConnectWise ScreenConnect - Successful User Creation via SetupWizard with Auth Bypass CWE-288 (CVE-2024-1709)"
+      ],
+      "refs": [
+        "https://github.com/rapid7/metasploit-framework/pull/18870",
+        "https://github.com/watchtowrlabs/connectwise-screenconnect_auth-bypass-add-user-poc",
+        "https://techcrunch.com/2024/02/21/researchers-warn-high-risk-connectwise-flaw-under-attack-is-embarrassingly-easy-to-exploit/",
+        "https://www.bleepingcomputer.com/news/security/connectwise-urges-screenconnect-admins-to-patch-critical-rce-flaw/",
+        "https://www.connectwise.com/company/trust/security-bulletins/connectwise-screenconnect-23.9.8"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-49113",
+      "cvss": 9.9,
+      "cvss_level": "Critical",
+      "vendor": "Roundcube",
+      "product": "Webmail",
+      "version_end": "1.5.10",
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-502",
+      "description": "Roundcube Webmail before 1.5.10 and 1.6.x before 1.6.11 allows remote code execution by authenticated users because the _from parameter in a URL is not validated in program/actions/settings/upload.php, leading to PHP Object Deserialization.",
+      "first_seen": "2026-06-17",
+      "last_seen": "2026-06-17",
+      "hit_count": 1,
+      "countries": "United Kingdom",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS Roundcube Post-Auth RCE via PHP Object Deserialization (CVE-2025-49113)"
+      ],
+      "refs": [
+        "https://fearsoff.org/research/roundcube",
+        "https://github.com/roundcube/roundcubemail/commit/0376f69e958a8fef7f6f09e352c541b4e7729c4d",
+        "https://github.com/roundcube/roundcubemail/commit/7408f31379666124a39f9cb1018f62bc5e2dc695",
+        "https://github.com/roundcube/roundcubemail/commit/c50a07d88ca38f018a0f4a0b008e9a1deb32637e",
+        "https://github.com/roundcube/roundcubemail/pull/9865"
+      ]
+    },
+    {
+      "cve_id": "CVE-2021-1497",
+      "cvss": 9.8,
+      "cvss_level": "Critical",
+      "vendor": "Cisco",
+      "product": "Cisco HyperFlex HX Data Platform",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-78",
+      "description": "Multiple vulnerabilities in the web-based management interface of Cisco HyperFlex HX could allow an unauthenticated, remote attacker to perform command injection attacks against an affected device. For more information about these vulnerabilities, see the Details section of this advisory.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 2,
+      "et_msgs": [
+        "ET EXPLOIT Cisco HyperFlex OS Command Injection M1 (CVE-2021-1497)",
+        "ET EXPLOIT Cisco HyperFlex OS Command Injection M2 (CVE-2021-1497)"
+      ],
+      "refs": [
+        "http://packetstormsecurity.com/files/162976/Cisco-HyperFlex-HX-Data-Platform-Command-Execution.html",
+        "https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hyperflex-rce-TjjNrkpR"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-42793",
+      "cvss": 9.8,
+      "cvss_level": "Critical",
+      "vendor": "JetBrains",
+      "product": "TeamCity",
+      "version_end": "2023.05.4",
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-288",
+      "description": "In JetBrains TeamCity before 2023.05.4 authentication bypass leading to RCE on TeamCity Server was possible",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 2,
+      "et_msgs": [
+        "ET EXPLOIT JetBrains TeamCity Auth Bypass Attempt (CVE-2023-42793)",
+        "ET EXPLOIT JetBrains TeamCity Auth Bypass Successful Attempt (CVE-2023-42793)"
+      ],
+      "refs": [
+        "http://packetstormsecurity.com/files/174860/JetBrains-TeamCity-Unauthenticated-Remote-Code-Execution.html",
+        "https://attackerkb.com/topics/1XEEEkGHzt/cve-2023-42793",
+        "https://blog.jetbrains.com/teamcity/2023/09/cve-2023-42793-vulnerability-post-mortem/",
+        "https://www.jetbrains.com/privacy-security/issues-fixed/",
+        "https://www.rapid7.com/blog/post/2023/09/25/etr-cve-2023-42793-critical-authentication-bypass-in-jetbrains-teamcity-ci-cd-servers/"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-27198",
+      "cvss": 9.8,
+      "cvss_level": "Critical",
+      "vendor": "JetBrains",
+      "product": "TeamCity",
+      "version_end": "2023.11.4",
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-288",
+      "description": "In JetBrains TeamCity before 2023.11.4 authentication bypass allowing to perform admin actions was possible",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 5,
+      "countries": "Netherlands",
+      "et_sig_count": 3,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS JetBrains TeamCity Authentication Bypass Attempt (CVE-2024-27198) - Vulnerability Check",
+        "ET WEB_SPECIFIC_APPS JetBrains TeamCity Authentication Bypass Attempt (CVE-2024-27198) - Admin User Creation Attempt",
+        "ET WEB_SPECIFIC_APPS JetBrains TeamCity Authentication Bypass Attempt (CVE-2024-27198) - Auth Token Creation Attempt"
+      ],
+      "refs": [
+        "https://www.darkreading.com/cyberattacks-data-breaches/jetbrains-teamcity-mass-exploitation-underway-rogue-accounts-thrive",
+        "https://www.jetbrains.com/privacy-security/issues-fixed/"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-44000",
+      "cvss": 9.8,
+      "cvss_level": "Critical",
+      "vendor": "LiteSpeed Technologies",
+      "product": "LiteSpeed Cache",
+      "version_end": "6.5.0.1.",
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-522",
+      "description": "Insufficiently Protected Credentials vulnerability in LiteSpeed Technologies LiteSpeed Cache litespeed-cache allows Authentication Bypass.This issue affects LiteSpeed Cache: from n/a through < 6.5.0.1.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS Wordpress LiteSpeed Cache Plugin debug.log Access Attempt (CVE-2024-44000)"
+      ],
+      "refs": [
+        "https://patchstack.com/database/Wordpress/Plugin/litespeed-cache/vulnerability/wordpress-litespeed-cache-plugin-6-5-0-1-unauthenticated-account-takeover-vulnerability?_s_id=cve"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-27954",
+      "cvss": 9.3,
+      "cvss_level": "Critical",
+      "vendor": "WP Automatic",
+      "product": "Automatic",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-22",
+      "description": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal') vulnerability in WP Automatic Automatic allows Path Traversal, Server Side Request Forgery.This issue affects Automatic: from n/a through 3.92.0.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS WordPress Plugin wp-automatic Server-Side Request Forgery (CVE-2024-27954)"
+      ],
+      "refs": [
+        "https://patchstack.com/database/vulnerability/wp-automatic/wordpress-automatic-plugin-3-92-0-unauthenticated-arbitrary-file-download-and-ssrf-vulnerability?_s_id=cve"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-27997",
+      "cvss": 9.2,
+      "cvss_level": "Critical",
+      "vendor": "Fortinet",
+      "product": "FortiOS-6K7K; FortiProxy; FortiOS",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-122",
+      "description": "A heap-based buffer overflow vulnerability [CWE-122] in FortiOS version 7.2.4 and below, version 7.0.11 and below, version 6.4.12 and below, version 6.0.16 and below and FortiProxy version 7.2.3 and below, version 7.0.9 and below, version 2.0.12 and below, version 1.2 all versions, version 1.1 all versions SSL-VPN may allow a remote attacker to execute arbitrary code or commands via specifically crafted requests.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 2,
+      "countries": "Netherlands",
+      "et_sig_count": 7,
+      "et_msgs": [
+        "ET EXPLOIT Fortigate VPN - Repeated GET Requests to /remote/hostcheck_validate (CVE-2023-27997)",
+        "ET EXPLOIT Fortigate VPN - Repeated POST Requests to /remote/hostcheck_validate (CVE-2023-27997) M1",
+        "ET EXPLOIT Fortigate VPN - Repeated POST Requests to /remote/hostcheck_validate (CVE-2023-27997) M2",
+        "ET EXPLOIT Fortigate VPN - Repeated GET Requests to /remote/logincheck (CVE-2023-27997)",
+        "ET EXPLOIT Fortigate VPN - Repeated POST Requests to /remote/logincheck (CVE-2023-27997)",
+        "ET EXPLOIT Fortigate VPN - Request to /remote/info - Possible CVE-2023-27997 Exploit Attempt",
+        "ET EXPLOIT Fortigate VPN - Repeated POST Requests to /remote/error (CVE-2023-27997)"
+      ],
+      "refs": [
+        "https://fortiguard.com/psirt/FG-IR-23-097"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-5806",
+      "cvss": 9.1,
+      "cvss_level": "Critical",
+      "vendor": "Progress",
+      "product": "MOVEit Transfer",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-287",
+      "description": "Improper Authentication vulnerability in Progress MOVEit Transfer (SFTP module) can lead to Authentication Bypass.This issue affects MOVEit Transfer: from 2023.0.0 before 2023.0.11, from 2023.1.0 before 2023.1.6, from 2024.0.0 before 2024.0.2.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 2,
+      "et_msgs": [
+        "ET EXPLOIT MoveIT Transfer SFTP Authentication Bypass Attempt Inbound M0 (CVE-2024-5806)",
+        "ET EXPLOIT MoveIT Transfer SFTP Authentication Bypass Attempt Inbound M1 (CVE-2024-5806)"
+      ],
+      "refs": [
+        "https://community.progress.com/s/article/MOVEit-Transfer-Product-Security-Alert-Bulletin-June-2024-CVE-2024-5806",
+        "https://www.progress.com/moveit"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-21643",
+      "cvss": 9.1,
+      "cvss_level": "Critical",
+      "vendor": "Fortinet",
+      "product": "FortiClientEMS",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-89",
+      "description": "An improper neutralization of special elements used in an sql command ('sql injection') vulnerability in Fortinet FortiClientEMS 7.4.4 may allow an unauthenticated attacker to execute unauthorized code or commands via specifically crafted HTTP requests.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-28",
+      "hit_count": 516,
+      "countries": "Australia, Belgium, Brazil, Chile, France, India, Indonesia, Japan, Netherlands, Singapore, South Korea, Sweden, Taiwan, The Netherlands, United Kingdom, United States",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS Fortigate Forticlient EMS HTTP Site Header SQL injection attempt (CVE-2026-21643)"
+      ],
+      "refs": [
+        "https://fortiguard.fortinet.com/psirt/FG-IR-25-1142"
+      ]
+    },
+    {
+      "cve_id": "CVE-2021-34473",
+      "cvss": 9.1,
+      "cvss_level": "Critical",
+      "vendor": "Microsoft",
+      "product": "Microsoft Exchange Server 2013 Cumulative Update 23; Microsoft Exchange Server 2019 Cumulative Update 9; Microsoft Exchange Server 2016 Cumulative Update 20; Microsoft Exchange Server 2016 Cumulative Update 19; Microsoft Exchange Server 2019 Cumulative Update 8",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": null,
+      "description": "Microsoft Exchange Server Remote Code Execution Vulnerability",
+      "first_seen": "2026-06-02",
+      "last_seen": "2026-06-28",
+      "hit_count": 13,
+      "countries": "Local, United States",
+      "et_sig_count": 5,
+      "et_msgs": [
+        "ET EXPLOIT Possible Microsoft Exchange RCE Inbound M1 (CVE-2021-34473)",
+        "ET EXPLOIT Possible Microsoft Exchange RCE Inbound M2 (CVE-2021-34473)",
+        "ET EXPLOIT Possible Microsoft Exchange RCE with Python PSRP Client UA Inbound (CVE-2021-34473)",
+        "ET EXPLOIT Possible Microsoft Exchange RCE Inbound M3 (CVE-2021-34473)",
+        "ET EXPLOIT Possible Microsoft Exchange Mailbox Enumeration Inbound (CVE-2021-34473)"
+      ],
+      "refs": [
+        "http://packetstormsecurity.com/files/163895/Microsoft-Exchange-ProxyShell-Remote-Code-Execution.html",
+        "https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2021-34473",
+        "https://www.zerodayinitiative.com/advisories/ZDI-21-821/"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-4123",
+      "cvss": 7.6,
+      "cvss_level": "High",
+      "vendor": "Grafana",
+      "product": "Grafana",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-79;CWE-601",
+      "description": "A cross-site scripting (XSS) vulnerability exists in Grafana caused by combining a client path traversal and open redirect. This allows attackers to redirect users to a website that hosts a frontend plugin that will execute arbitrary JavaScript. This vulnerability does not require editor permissions and if anonymous access is enabled, the XSS will work. If the Grafana Image Renderer plugin is installed, it is possible to exploit the open redirect to achieve a full read SSRF.\n\nThe default Content",
+      "first_seen": "2026-05-31",
+      "last_seen": "2026-06-29",
+      "hit_count": 268,
+      "countries": "Andorra, Australia, Brazil, Canada, Chile, France, Germany, Hong Kong, Hungary, India, Indonesia, Japan, Netherlands, Singapore, South Korea, Sweden, Switzerland, Taiwan, The Netherlands, United Kingdom, United States",
+      "et_sig_count": 2,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS Grafana Account Takeover via Path Traversal & Open Redirect (CVE-2025-4123)",
+        "ET WEB_SPECIFIC_APPS Grafana Open Redirect (CVE-2025-4123) M2"
+      ],
+      "refs": [
+        "https://grafana.com/blog/2025/05/23/grafana-security-release-medium-and-high-severity-security-fixes-for-cve-2025-4123-and-cve-2025-3580/",
+        "https://grafana.com/security/security-advisories/cve-2025-4123/"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-4020",
+      "cvss": 7.5,
+      "cvss_level": "High",
+      "vendor": "RocketGenius",
+      "product": "Gravity SMTP",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-200",
+      "description": "The Gravity SMTP plugin for WordPress is vulnerable to Sensitive Information Exposure in all versions up to, and including, 2.1.4. This is due to a REST API endpoint registered at /wp-json/gravitysmtp/v1/tests/mock-data with a permission_callback that unconditionally returns true, allowing any unauthenticated visitor to access it. When the ?page=gravitysmtp-settings query parameter is appended, the plugin's register_connector_data() method populates internal connector data, causing the endpoint ",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-26",
+      "hit_count": 1,
+      "countries": "United States",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS WordPress Plugin Gravity SMTP Unauthenticated REST API (CVE-2026-4020)"
+      ],
+      "refs": [
+        "https://docs.gravitysmtp.com/gravity-smtp-changelog/",
+        "https://plugins.trac.wordpress.org/browser/gravitysmtp/tags/2.1.4/vendor/gravityforms/gravity-tools/src/Providers/class-config-collection-service-provider.php#L103",
+        "https://plugins.trac.wordpress.org/browser/gravitysmtp/tags/2.1.4/vendor/gravityforms/gravity-tools/src/Providers/class-config-collection-service-provider.php#L86",
+        "https://plugins.trac.wordpress.org/browser/gravitysmtp/trunk/vendor/gravityforms/gravity-tools/src/Providers/class-config-collection-service-provider.php#L103",
+        "https://plugins.trac.wordpress.org/browser/gravitysmtp/trunk/vendor/gravityforms/gravity-tools/src/Providers/class-config-collection-service-provider.php#L86"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-20767",
+      "cvss": 7.4,
+      "cvss_level": "High",
+      "vendor": "Adobe",
+      "product": "ColdFusion",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-284",
+      "description": "ColdFusion versions 2023.6, 2021.12 and earlier are affected by an Improper Access Control vulnerability that could result in arbitrary file system read. An attacker could leverage this vulnerability to access or modify restricted files. Exploitation of this issue does not require user interaction. Exploitation of this issue requires the admin panel be exposed to the internet.",
+      "first_seen": "2026-06-15",
+      "last_seen": "2026-06-17",
+      "hit_count": 3,
+      "countries": "France",
+      "et_sig_count": 3,
+      "et_msgs": [
+        "ET WEB_SERVER Adobe ColdFusion Arbitrary File Read Vulnerability M2 - logging Module Directory Traversal Attempt (CVE-2024-20767)",
+        "ET WEB_SERVER Adobe ColdFusion Arbitrary File Read Vulnerability M1 - UUID Leak Via servermanager.cfc getHeartBeat Method (CVE-2024-20767)",
+        "ET WEB_SERVER Adobe ColdFusion Arbitrary File Read Vulnerability M3 - Heap Memory Dump Module Unauthorized Memory Dump Attempt (CVE-2024-20767)"
+      ],
+      "refs": [
+        "https://helpx.adobe.com/security/products/coldfusion/apsb24-14.html"
+      ]
+    },
+    {
+      "cve_id": "CVE-2020-13921",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "Apache",
+      "product": "Apache SkyWalking",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": null,
+      "description": "**Resolved** Only when using H2/MySQL/TiDB as Apache SkyWalking storage, there is a SQL injection vulnerability in the wildcard query cases.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-28",
+      "hit_count": 25,
+      "countries": "Australia, France, India, Japan, Netherlands, Singapore, South Korea, Sweden, The Netherlands, United Kingdom, United States",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS Apache SkyWalking GraphQL SQL Injection Inbound (CVE-2020-13921)"
+      ],
+      "refs": [
+        "http://www.openwall.com/lists/oss-security/2020/08/05/3",
+        "https://github.com/apache/skywalking/pull/4970",
+        "https://lists.apache.org/thread.html/r6f3a934ebc54585d8468151a494c1919dc1ee2cccaf237ec434dbbd6%40%3Cdev.skywalking.apache.org%3E"
+      ]
+    },
+    {
+      "cve_id": "CVE-2020-5902",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": null,
+      "product": "BIG-IP",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": null,
+      "description": "In BIG-IP versions 15.0.0-15.1.0.3, 14.1.0-14.1.2.5, 13.1.0-13.1.3.3, 12.1.0-12.1.5.1, and 11.6.1-11.6.5.1, the Traffic Management User Interface (TMUI), also referred to as the Configuration utility, has a Remote Code Execution (RCE) vulnerability in undisclosed pages.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 2,
+      "et_msgs": [
+        "ET EXPLOIT F5 TMUI RCE vulnerability CVE-2020-5902 Attempt M1",
+        "ET EXPLOIT F5 TMUI RCE vulnerability CVE-2020-5902 Attempt M2"
+      ],
+      "refs": [
+        "http://packetstormsecurity.com/files/158333/BIG-IP-TMUI-Remote-Code-Execution.html",
+        "http://packetstormsecurity.com/files/158334/BIG-IP-TMUI-Remote-Code-Execution.html",
+        "http://packetstormsecurity.com/files/158366/F5-BIG-IP-TMUI-Directory-Traversal-File-Upload-Code-Execution.html",
+        "http://packetstormsecurity.com/files/158414/Checker-CVE-2020-5902.html",
+        "http://packetstormsecurity.com/files/158581/F5-Big-IP-13.1.3-Build-0.0.6-Local-File-Inclusion.html"
+      ]
+    },
+    {
+      "cve_id": "CVE-2021-22893",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "Pulse",
+      "product": "Pulse Connect Secure",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-287",
+      "description": "Pulse Connect Secure 9.0R3/9.1R1 and higher is vulnerable to an authentication bypass vulnerability exposed by the Windows File Share Browser and Pulse Secure Collaboration features of Pulse Connect Secure that can allow an unauthenticated user to perform remote arbitrary code execution on the Pulse Connect Secure gateway. This vulnerability has been exploited in the wild.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 3,
+      "et_msgs": [
+        "ET EXPLOIT [FIREEYE] Suspicious Pulse Secure HTTP Request (CVE-2021-22893) M1",
+        "ET EXPLOIT [FIREEYE] Suspicious Pulse Secure HTTP Request (CVE-2021-22893) M2",
+        "ET EXPLOIT [FIREEYE] Suspicious Pulse Secure HTTP Request (CVE-2021-22893) M3"
+      ],
+      "refs": [
+        "https://blog.pulsesecure.net/pulse-connect-secure-security-update/",
+        "https://kb.cert.org/vuls/id/213092",
+        "https://kb.pulsesecure.net/articles/Pulse_Security_Advisories/SA44784/",
+        "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
+      ]
+    },
+    {
+      "cve_id": "CVE-2022-36804",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "Atlassian",
+      "product": "Bitbucket Server; Bitbucket Data Center",
+      "version_end": "8.3.1",
+      "version_end_inclusive": false,
+      "weaknesses": null,
+      "description": "Multiple API endpoints in Atlassian Bitbucket Server and Data Center 7.0.0 before version 7.6.17, from version 7.7.0 before version 7.17.10, from version 7.18.0 before version 7.21.4, from version 8.0.0 before version 8.0.3, from version 8.1.0 before version 8.1.3, and from version 8.2.0 before version 8.2.2, and from version 8.3.0 before 8.3.1 allows remote attackers with read permissions to a public or private Bitbucket repository to execute arbitrary code by sending a malicious HTTP request. ",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET EXPLOIT Atlassian Bitbucket CVE-2022-36804 Exploit Attempt"
+      ],
+      "refs": [
+        "http://packetstormsecurity.com/files/168470/Bitbucket-Git-Command-Injection.html",
+        "http://packetstormsecurity.com/files/171453/Bitbucket-7.0.0-Remote-Command-Execution.html",
+        "https://jira.atlassian.com/browse/BSERV-13438"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-34362",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "Microsoft",
+      "product": "Progress MOVEit Transfer",
+      "version_end": "2021.0.6",
+      "version_end_inclusive": false,
+      "weaknesses": null,
+      "description": "In Progress MOVEit Transfer before 2021.0.6 (13.0.6), 2021.1.4 (13.1.4), 2022.0.4 (14.0.4), 2022.1.5 (14.1.5), and 2023.0.1 (15.0.1), a SQL injection vulnerability has been found in the MOVEit Transfer web application that could allow an unauthenticated attacker to gain access to MOVEit Transfer's database. Depending on the database engine being used (MySQL, Microsoft SQL Server, or Azure SQL), an attacker may be able to infer information about the structure and contents of the database, and exe",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 2,
+      "countries": "Netherlands",
+      "et_sig_count": 14,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - HTTP POST to /moveitaspi.dll (CVE-2023-34362)",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - HTTP POST to /guestaccess.aspx (CVE-2023-34362)",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - HTTP POST to /api/v1/folders (CVE-2023-34362)",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Set Session Variables - Guest Account Creation - CVE-2023-34362 Stage 1a",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Set Session Variables - SQLi Payload Creation - CVE-2023-34362 Stage 1b",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - CSRF Token Request on guestaccess.aspx - CVE-2023-34362 Stage 1b",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Successful CSRF Token Request on guestaccess.aspx - CVE-2023-34362 Stage 1b",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Trigger SQL Injection via guestaccess.aspx - CVE-2023-34362 Stage 2",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - API Token Request - CVE-2023-34362 Stage 3",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Successful API Token Request - CVE-2023-34362 Stage 3",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Folder Request - CVE-2023-34362 Stage 4",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Successful Folder Request - CVE-2023-34362 Stage 4",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Set Session Variables - SQLi Payload Creation - CVE-2023-34362 Stage 5a",
+        "ET WEB_SPECIFIC_APPS MOVEit File Transfer - Payload Trigger Request - CVE-2023-34362 Stage 5b"
+      ],
+      "refs": [
+        "http://packetstormsecurity.com/files/172883/MOVEit-Transfer-SQL-Injection-Remote-Code-Execution.html",
+        "http://packetstormsecurity.com/files/173110/MOVEit-SQL-Injection.html",
+        "https://community.progress.com/s/article/MOVEit-Transfer-Critical-Vulnerability-31May2023"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-23897",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "Jenkins Project",
+      "product": "Jenkins",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": null,
+      "description": "Jenkins 2.441 and earlier, LTS 2.426.2 and earlier does not disable a feature of its CLI command parser that replaces an '@' character followed by a file path in an argument with the file's contents, allowing unauthenticated attackers to read arbitrary files on the Jenkins controller file system.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 2,
+      "countries": "Netherlands",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET EXPLOIT Jenkins Unauthenticated RCE Attempt Observed (CVE-2024-23897)"
+      ],
+      "refs": [
+        "http://packetstormsecurity.com/files/176839/Jenkins-2.441-LTS-2.426.3-CVE-2024-23897-Scanner.html",
+        "http://packetstormsecurity.com/files/176840/Jenkins-2.441-LTS-2.426.3-Arbitrary-File-Read.html",
+        "http://www.openwall.com/lists/oss-security/2024/01/24/6",
+        "https://www.jenkins.io/security/advisory/2024-01-24/#SECURITY-3314",
+        "https://www.sonarsource.com/blog/excessive-expansion-uncovering-critical-security-vulnerabilities-in-jenkins/"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-36104",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "Apache Software Foundation",
+      "product": "Apache OFBiz",
+      "version_end": "18.12.14.",
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-22",
+      "description": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal') vulnerability in Apache OFBiz. This issue affects Apache OFBiz: before 18.12.14.\n\nUsers are recommended to upgrade to version 18.12.14, which fixes the issue.",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS Apache OFBiz Directory Traversal Remote Code Execution Attempt (CVE-2024-36104)"
+      ],
+      "refs": [
+        "http://www.openwall.com/lists/oss-security/2024/06/03/1",
+        "https://issues.apache.org/jira/browse/OFBIZ-13092",
+        "https://lists.apache.org/thread/sv0xr8b1j7mmh5p37yldy9vmnzbodz2o",
+        "https://ofbiz.apache.org/download.html",
+        "https://ofbiz.apache.org/security.html"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-38856",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "Apache Software Foundation",
+      "product": "Apache OFBiz",
+      "version_end": "18.12.14.",
+      "version_end_inclusive": true,
+      "weaknesses": "CWE-863",
+      "description": "Incorrect Authorization vulnerability in Apache OFBiz.\n\nThis issue affects Apache OFBiz: through 18.12.14.\n\nUsers are recommended to upgrade to version 18.12.15, which fixes the issue.\n\nUnauthenticated endpoints could allow execution of screen rendering code of screens if some preconditions are met (such as when the screen definitions don't explicitly check user's permissions because they rely on the configuration of their endpoints).",
+      "first_seen": "2026-06-01",
+      "last_seen": "2026-06-01",
+      "hit_count": 1,
+      "countries": "Netherlands",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS Apache OFBiz Pre-Auth Remote Code Execution Attempt (CVE-2024-38856)"
+      ],
+      "refs": [
+        "https://issues.apache.org/jira/browse/OFBIZ-13128",
+        "https://lists.apache.org/thread/olxxjk6b13sl3wh9cmp0k2dscvp24l7w",
+        "https://ofbiz.apache.org/download.html",
+        "https://ofbiz.apache.org/security.html"
+      ]
+    },
+    {
+      "cve_id": "CVE-2022-22274",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "SonicWall",
+      "product": "SonicOS",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-121",
+      "description": "A Stack-based buffer overflow vulnerability in the SonicOS via HTTP request allows a remote unauthenticated attacker to cause Denial of Service (DoS) or potentially results in code execution in the firewall.",
+      "first_seen": "2026-06-03",
+      "last_seen": "2026-06-28",
+      "hit_count": 16,
+      "countries": "Australia, India, Japan, Singapore, South Korea, Sweden, United Kingdom, United States",
+      "et_sig_count": 2,
+      "et_msgs": [
+        "ET WEB_SPECIFIC_APPS SonicWall SonicOS Unauthenticated Stack-Based Buffer Overflow (CVE-2022-22274) M1",
+        "ET WEB_SPECIFIC_APPS SonicWall SonicOS Unauthenticated Stack-Based Buffer Overflow (CVE-2022-22274) M2"
+      ],
+      "refs": [
+        "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2022-0003"
+      ]
+    },
+    {
+      "cve_id": "CVE-2020-5410",
+      "cvss": null,
+      "cvss_level": "Unknown",
+      "vendor": "Spring by VMware",
+      "product": "Spring Cloud Config",
+      "version_end": null,
+      "version_end_inclusive": false,
+      "weaknesses": "CWE-23",
+      "description": "Spring Cloud Config, versions 2.2.x prior to 2.2.3, versions 2.1.x prior to 2.1.9, and older unsupported versions allow applications to serve arbitrary configuration files through the spring-cloud-config-server module. A malicious user, or attacker, can send a request using a specially crafted URL that can lead to a directory traversal attack.",
+      "first_seen": "2026-06-13",
+      "last_seen": "2026-06-17",
+      "hit_count": 2,
+      "countries": "Switzerland, United States",
+      "et_sig_count": 1,
+      "et_msgs": [
+        "ET EXPLOIT VMware Spring Cloud Directory Traversal (CVE-2020-5410)"
+      ],
+      "refs": [
+        "https://tanzu.vmware.com/security/cve-2020-5410"
+      ]
+    }
+  ]
+}

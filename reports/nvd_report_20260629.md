@@ -1,183 +1,146 @@
 # NVD 脅威インテリジェンスレポート
 
-- **生成日時**: 2026-06-28 15:00 UTC
-- **対象期間**: `2026-06-27T15:00:22.000Z` 〜 `2026-06-28T15:00:24.000Z`
-- **重要CVE数**: 11 件（Critical 9.0+: 2 件 / High 7.0〜: 9 件）
+- **生成日時**: 2026-06-29 09:01 UTC
+- **対象期間**: `2026-06-28T19:56:22.000Z` 〜 `2026-06-29T09:01:03.000Z`
+- **重要CVE数**: 7 件（Critical 9.0+: 0 件 / High 7.0〜: 7 件）
 
 ---
 
 ## AI 分析サマリー
 
 ## 1. 全体サマリー  
-直近で公開された CVSS 7.0 以上の脆弱性は、**ネットワークサービスの遠隔コード実行・権限昇格**、**メディア処理ライブラリのメモリ破壊**、**CI/CD パイプラインやリモートデスクトップの認可バイパス** といった、攻撃者が直接システムを支配できるケースが目立ちます。特に **rsync デーモン** や **Docker バックエンドを利用した Gitea act_runner** など、インフラ層のコンポーネントで高深刻度（9.0 以上）のバッファオーバーフローが報告されており、即時のパッチ適用が求められます。  
+- 直近で公開された CVE のうち、**CVSS 7.0 以上**のものはすべて **リモートからのコード実行（RCE）や権限昇格** を可能にする深刻なバッファオーバーフローが中心です。  
+- 対象製品は **エンタープライズ向けストレージ（Hitachi Virtual Storage Platform）** と **家庭・中小規模向けネットワーク機器（Wavlink、Tenda）** に偏っており、特に **Web 管理インターフェース** の入力検証不備が共通点です。  
+- 多くの脆弱性は **ファームウェアの古いバージョン** に残っており、ベンダーがすでにパッチをリリースしているケースが多数です。早急なアップデートが被害防止の鍵となります。  
 
 ---
 
 ## 2. 特に注目すべき CVE  
 
-| CVE | CVSS | 主な影響 | 注目理由・影響範囲 |
-|-----|------|----------|-------------------|
-| **CVE‑2024‑12084** | 9.8 (CVSS:3.1) | rsync デーモンのヒープバッファオーバーフロー | 攻撃者が任意のチェックサム長を送信するだけで、リモートから任意コード実行が可能。rsync は多くの Linux ディストリビューションでデフォルトでインストールされているため、広範囲に影響が及ぶ。 |
-| **CVE‑2026‑58053** | 9.4 (CVSS:4.0) | Gitea act_runner (Docker バックエンド) のコンテナオプション不適切なマージ | `privileged: false` が指定されても `--pid=host` などの危険オプションが有効になるため、攻撃者がリモートでコンテナ内特権を取得できる。CI/CD 環境で自動化されたジョブが多数走る組織は即時対策が必要。 |
-| **CVE‑2026‑58049** | 8.8 (CVSS:4.0) | FFmpeg RASC デコーダの行境界チェック不備 | 悪意ある RASC ビデオストリームをデコードすると、ヒープオーバーランが発生し、リモートコード実行やサービス停止が起こり得る。FFmpeg はメディアサーバ・ストリーミングサービスで広く利用されている。 |
-| **CVE‑2026‑10643** | 8.7 (CVSS:3.1) | Zephyr OS の IP ソケット `recvmsg()` の ancilliary バッファ検証不備 | ローカル権限が低いプロセスから特権情報を上書きでき、情報漏洩＋権限昇格が可能。組み込みデバイス・IoT 向け OS での採用が増えているため、ファームウェア更新が必要。 |
-| **CVE‑2026‑58054** | 8.6 (CVSS:4.0) | MyBB 1.8.40 の管理者権限委譲バイパス | 限定管理者がユーザー作成時に `Administrators` グループを選択でき、結果的にフル管理者権限取得が可能。Web フォーラムを運営している組織はすぐに権限設定の見直しとアップデートが必要。 |
+| CVE | CVSS | 製品・影響範囲 | 主なリスク | 注目理由 |
+|-----|------|----------------|------------|----------|
+| **CVE‑2025‑2902** | 8.3 (AV:N/AC:L/PR:L/UI:N) | Hitachi Virtual Storage Platform (E390/E590/E790/E990/E1090 など) | メンテナンスユーティリティの認可不備により、認証済みユーザーが任意の管理コマンドを実行可能。機密データの取得やストレージ構成変更が可能になる。 | エンタープライズ向けストレージは重要インフラであり、被害が広範囲に及ぶ可能性が高い。パッチ適用が遅れると、内部脅威だけでなく外部からの標的型攻撃の踏み台になる。 |
+| **CVE‑2026‑13539** | 7.4 (AV:N/AC:L/PR:L) | Wavlink WL‑NU516U1‑A (ファームウェア V240425) | `/cgi-bin/wireless.cgi` の `Guest_ssid` パラメータでスタックバッファオーバーフローが発生し、リモートからコード実行が可能。 | 無線アクセスポイントは社内ネットワークの入り口。公開 Wi‑Fi 環境での利用が想定され、攻撃者がネットワーク全体に踏み込む足掛かりになる。 |
+| **CVE‑2026‑13519** 〜 **CVE‑2026‑13515** (Tenda JD12L) | 7.4 (AV:N/AC:L/PR:L) | Tenda JD12L (ファームウェア 16.03.53.23) の複数 CGI エンドポイント (`/goform/NatStaticSetting` など) | 各エンドポイントでスタックバッファオーバーフローが確認され、遠隔から任意コード実行が可能。全 6 件が同一ファームウェアに集中。 | 同一デバイスに多数の未修正脆弱性が残存。攻撃者は任意のエンドポイントを選択でき、検知回避が容易になる。 |
+
+> **注:** Tenda 系の脆弱性はすべて同一ファームウェアバージョンに起因しているため、**一括アップデート** が最も効果的です。
 
 ---
 
 ## 3. 推奨アクション  
 
-### 3.1 パッケージ・バージョンのアップデート
-| 製品 / ライブラリ | 現行脆弱バージョン | 推奨バージョン (リリース日) | 備考 |
-|-------------------|-------------------|----------------------------|------|
-| **rsync** | ≤ 3.2.7 (多くのディストリビューションでデフォルト) | **3.2.8** 以上 | 公式パッチで `s2length` の長さチェックが追加。 |
-| **act (Gitea act_runner)** | 0.262.0 | **0.263.0** 以上 | `container.options` のマージロジックが修正され、特権オプションが除外される。 |
-| **ffmpeg** | ≤ 7.0 (含む libavcodec 7.0) | **7.1** 以上 | RASC デコーダの行境界チェックが強化。 |
-| **Zephyr OS** | 3.5.0 以前 | **3.6.0** 以上 | `recvmsg()` の ancilliary バッファ検証が追加。 |
-| **MyBB** | 1.8.40 | **1.8.41** 以上 | `verify_usergroup()` が管理者グループを除外するよう修正。 |
-| **libssh2** | ≤ 1.11.1 | **1.11.2** 以上 | 公開鍵リストの再割当時にゼロ初期化、属性数の上限チェックが追加。 |
-| **WordPress Frontend File Manager Plugin** | ≤ 23.6 | **23.7** 以上 | `wpfm_dir_path` のサニタイズ強化により任意削除が防止。 |
-| **Windows Server Update Services (WSUS)** | Windows Server 2019/2022 の未パッチ版 | **2024‑03‑更新プログラム (KBxxxxxx)** | MS が提供する Elevation of Privilege 修正を適用。 |
-| **RustDesk** | ≤ 1.2.3 | **1.2.4** 以上 | セッションフラグのクリアロジックが追加。 |
+### 3.1 共通対策
+- **ファームウェア／ソフトウェアの即時更新**  
+  - ベンダーが提供する最新パッチを適用し、バージョン番号を確認。  
+- **管理インターフェースへのアクセス制限**  
+  - 管理画面は VPN や IP アクセスリストで社内ネットワークのみからアクセス可能にする。  
+- **不要な機能・サービスの無効化**  
+  - `Guest_ssid` や `NatStaticSetting` など、使用しない CGI エンドポイントは Web サーバ設定で無効化。  
+- **侵入検知・ログ監視の強化**  
+  - `/cgi-bin/`、`/goform/` への POST リクエストを監視し、異常なパラメータ長や頻度をアラート化。  
 
-> **※ パッケージマネージャ例**  
-> - Debian/Ubuntu: `apt-get update && apt-get install --only-upgrade rsync ffmpeg libssh2-1`  
-> - RHEL/CentOS: `yum update rsync ffmpeg libssh2`  
-> - Alpine: `apk upgrade rsync ffmpeg libssh2`  
-> - Zephyr: ソースコードを取得し、`west update` で最新リリースへビルド。  
-> - WordPress: 管理画面 → プラグイン → 更新、または手動で `frontend-file-manager.zip` を上書き。  
+### 3.2 製品別具体的アクション  
 
-### 3.2 設定・運用上の緩和策
-1. **rsync**: `rsyncd.conf` で `use chroot = true` を有効化し、外部からの直接アクセスを防止。  
-2. **Gitea act_runner**: Docker バックエンド利用時は `privileged: false` に加えて `security_opt: ["no-new-privileges"]` を明示的に設定。  
-3. **FFmpeg**: 信頼できないメディアファイルのデコードはサンドボックス化（`firejail` など）して実行。  
-4. **MyBB**: 管理者権限委譲機能を無効化し、`Administrators` グループの `gid` を非表示にする。  
-5. **libssh2**: 公開鍵取得時に `SSH2_REALLOC` 後のメモリを `memset` でクリアするパッチを適用、または 1.11.2 以降に更新。  
-6. **WordPress**: プラグインのファイル削除機能は管理者権限のみ許可し、`wpfm_dir_path` パラ
+| 製品 | 推奨パッケージ／ファームウェア | 取得先・リリースノート |
+|------|------------------------------|------------------------|
+| **Hitachi Virtual Storage Platform** | **DKCMAIN Ver. 93‑07‑26‑xx/00 以降**、**GUM Ver. 93‑07‑26/00 以降** | Hitachi Support Portal（[リンク](https://www.hitachi.com/support)） |
+| **Wavlink WL‑NU516U1‑A** | **Firmware V240426 以上**（2026‑02‑15 リリース） | Wavlink ダウンロードセンター → 「WL‑NU516U1‑A Firmware」 |
+| **Tenda JD12L** | **Firmware 16.03.53.24**（2026‑03‑01 リリース） | Tenda Support → 「JD12L Firmware」 |
+| **共通** | **OpenSSH ≥ 9.5**（管理端末での安全なリモート接続） | OS ディストリビュータのパッケージリポジトリ |
+
+### 3.3 短期的な緊急措置
+1. **外部からの管理ポート（例: 80/443）を一時的に遮断**し、内部からのみアクセスできるようにする。  
+2. **脆弱性が確認された CGI エンドポイントの POST パラメータ長を Web アプリケーションファイアウォール（WAF）で上限設定**（例: 256 バイト）し、オーバーフローを防止。  
+3. **影響デバイスの資産一覧を作成し、優先度（業務重要度）に応じて段階的にパッチ適用**する。  
 
 ---
 
-## 🔴 Critical（CVSS 9.0+）
+### まとめ
+- 今回の CVE はすべて **リモートコード実行** を可能にする深刻度の高いバッファオーバーフローです。特にエンタープライズ向けストレージと家庭向けルータが対象となっており、**ネットワーク境界の防御が崩れるリスク** が顕著です。  
+- ベンダーが提供する **最新ファームウェア**（Hitachi: DKCMAIN/GUM 93‑07‑26‑xx/00、Wavlink: V240426、Tenda: 16.03.53.24）へのアップデートが最優先です。  
+- アップデートと同時に **アクセス制御・ログ監視・WAF 設定** を強化し、攻撃者の足掛かりを排除してください。  
 
-### CVE-2024-12084
+> **※** 本レポートは 2026 年 6 月時点の情報に基づいています。以降に新たなパッチや脆弱性情報が公開される可能性がありますので、定期的なベンダー情報のチェックを推奨します。
 
-| 項目 | 値 |
-|------|-----|
-| CVSS | `9.8` |
-| Vector | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H` |
-| Weaknesses | `CWE-122` |
-| Published | 2025-01-15T14:16:35.363Z |
-
-A heap-based buffer overflow flaw was found in the rsync daemon. This issue is due to improper handling of attacker-controlled checksum lengths (s2length) in the code. When MAX_DIGEST_LEN exceeds the fixed SUM_LENGTH (16 bytes), an attacker can write out of bounds in the sum2 buffer.
-
-### CVE-2026-58053
-
-| 項目 | 値 |
-|------|-----|
-| CVSS | `9.4` |
-| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
-| Weaknesses | `CWE-269` |
-| Published | 2026-06-28T02:16:32.420 |
-
-Gitea act_runner with the Docker backend (through act 0.262.0) passes a workflow's container.options string to the Docker job container's HostConfig and, when configured with privileged: false, forces only the Privileged flag off while merging options such as --pid=host, --cap-add, and --security-opt unchanged. A user who can run a workflow on a Docker-backed runner can create a job container with host namespaces and broad capabilities and escape to the host as root despite privileged mode being disabled.
+---
 
 ## 🟠 High（CVSS 7.0〜9.0 未満）
 
-### CVE-2026-58049
-
-| 項目 | 値 |
-|------|-----|
-| CVSS | `8.8` |
-| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:L/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
-| Weaknesses | `CWE-787` |
-| Published | 2026-06-28T02:16:30.477 |
-
-FFmpeg's RASC video decoder (decode_dlta in libavcodec/rasc.c) performs 32-bit reads and writes at the row cursor before the NEXT_LINE row-boundary check and validates the DLTA region in pixel rather than byte units, so a DLTA run on a PAL8 frame can access several bytes past the row allocation. A crafted media stream using the RASC FourCC, decoded by libavcodec, triggers a bitstream-controlled out-of-bounds heap write and adjacent out-of-bounds read, leading to memory corruption.
-
-### CVE-2026-10643
-
-| 項目 | 値 |
-|------|-----|
-| CVSS | `8.7` |
-| Vector | `CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:L/I:H/A:H` |
-| Weaknesses | `CWE-787` |
-| Published | 2026-06-28T00:16:24.637 |
-
-Zephyr's IP socket recvmsg() implementation (subsys/net/lib/sockets/sockets_inet.c, insert_pktinfo()) validated the user-supplied ancillary (msg_control) buffer using only the payload length (msg-msg_controllen < pktinfo_len) before writing a full control message consisting of an aligned cmsg header plus the payload. Because the check omitted the cmsg header size, a control buffer whose length falls in the under-checked window (e.g. 16-27 bytes for IPv4 IP_PKTINFO on a 64-bit target, where a single element actually occupies 28 bytes) passes the guard yet causes a fixed-size out-of-bounds write of up to one cmsg header (~12 bytes) past the end of the buffer. Under CONFIG_USERSPACE the recvmsg verifier allocates a kernel-heap copy of the control buffer sized to msg_controllen and runs the implementation against it, so the overflow corrupts kernel heap memory and is triggerable from an unprivileged userspace thread; in supervisor mode it corrupts the caller's buffer. The path is reachable on a UDP/IP socket with IP_PKTINFO/IPV6_RECVPKTINFO (or hoplimit/timestamping) enabled when the application calls recvmsg() with an undersized control buffer and a datagram is received; part of the overwritten bytes (the destination IP in ipi_addr) is influenced by the received packet. The fix makes the capacity check use NET_CMSG_SPACE(pktinfo_len) (aligned header + aligned data) and returns -ENOMEM when the buffer is too small. Affected: v3.6.0 through v4.4.0.
-
-### CVE-2026-58054
-
-| 項目 | 値 |
-|------|-----|
-| CVSS | `8.6` |
-| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:H/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
-| Weaknesses | `CWE-269` |
-| Published | 2026-06-28T02:16:32.550 |
-
-MyBB 1.8.40 does not restrict which usergroup a limited Admin Control Panel user may assign when creating or editing users; the user module offers the Administrators group (gid 4) and its datahandler's verify_usergroup() unconditionally returns true. An admin holding only the delegated user-management permission can assign the Administrators group to an account and escalate to the full Administrator permission set.
-
-### CVE-2026-58051
+### CVE-2025-2902
 
 | 項目 | 値 |
 |------|-----|
 | CVSS | `8.3` |
-| Vector | `CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:N/VI:L/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
-| Weaknesses | `CWE-908` |
-| Published | 2026-06-28T02:16:32.153 |
+| Vector | `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:H` |
+| Weaknesses | `CWE-862` |
+| Published | 2026-06-29T07:16:23.583 |
 
-libssh2 through 1.11.1 grows its publickey list with SSH2_REALLOC but does not zero-initialize new entries before parsing populates them, so a parse failure reaching the cleanup path leaves libssh2_publickey_list_free operating on an uninitialized entry. A malicious SSH server offering the publickey subsystem can use a malformed response to make cleanup free an uninitialized, attacker-influenceable attrs pointer in a connecting libssh2 client.
+Improper Authorization Vulnerability of Maintenance Utility in Hitachi Virtual Storage Platform.
 
-### CVE-2026-58050
+This issue affects Hitachi Virtual Storage Platform E390, E590, E790, E990, E1090, E390H, E590H, E790H, E1090H: before DKCMAIN Ver. 93-07-26-xx/00, GUM Ver. 93-07-26/00; Hitachi Virtual Storage Platform 5100, 5500, 5100H, 5500H, 5200, 5600, 5200H, 5600H: before DKCMAIN Ver. 90-09-27-00/00, GUM Ver. 90-09-27/00; Hitachi Virtual Storage Platform G130, G150, G350, G370, G700, G900, F350, F370, F700, F900: before DKCMAIN Ver. 88-08-16-xx/00, GUM Ver. 88-08-20/00.
 
-| 項目 | 値 |
-|------|-----|
-| CVSS | `8.3` |
-| Vector | `CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:L/VI:L/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
-| Weaknesses | `CWE-190` |
-| Published | 2026-06-28T02:16:32.017 |
-
-libssh2 through 1.11.1 reads an attacker-controlled 32-bit attribute count from a publickey-subsystem response and uses it in the allocation num_attrs * sizeof(libssh2_publickey_attribute) without bounds checking, so on 32-bit platforms the multiplication overflows to an undersized buffer. A malicious SSH server can then drive the attribute-parsing loop to write past the allocation, causing a heap buffer overflow in a connecting libssh2 client.
-
-### CVE-2026-8095
-
-| 項目 | 値 |
-|------|-----|
-| CVSS | `8.1` |
-| Vector | `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:H` |
-| Weaknesses | `CWE-73` |
-| Published | 2026-06-28T00:16:25.180 |
-
-The Frontend File Manager Plugin plugin for WordPress is vulnerable to Authenticated Arbitrary File Deletion in versions up to and including 23.6. This is due to a case-sensitive bypass of the wpfm_dir_path parameter sanitization in the wpfm_file_meta_update AJAX handler, where supplying WPFM_DIR_PATH in uppercase evades the unset check and is normalized to wpfm_dir_path by sanitize_key() during update_post_meta(), allowing an attacker to overwrite the stored file path with an arbitrary filesystem path that is then passed directly to unlink() in delete_file_locally() without any directory containment validation. This makes it possible for authenticated attackers with Subscriber-level access to delete arbitrary files on the server, including sensitive files such as wp-config.php, potentially leading to full site takeover.
-
-### CVE-2023-35317
-
-| 項目 | 値 |
-|------|-----|
-| CVSS | `7.8` |
-| Vector | `CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C` |
-| Weaknesses | `CWE-502` |
-| Published | 2023-07-11T17:02:36.983Z |
-
-Windows Server Update Service (WSUS) Elevation of Privilege Vulnerability
-
-### CVE-2026-10646
+### CVE-2026-13539
 
 | 項目 | 値 |
 |------|-----|
 | CVSS | `7.4` |
-| Vector | `CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H` |
-| Weaknesses | `CWE-416` |
-| Published | 2026-06-28T05:16:21.083 |
+| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
+| Weaknesses | `CWE-119;CWE-121` |
+| Published | 2026-06-29T07:16:24.183 |
 
-Zephyr's BSD-sockets getaddrinfo() implementation (subsys/net/lib/sockets/getaddrinfo.c) passes a pointer to a stack-allocated state object (struct getaddrinfo_state ai_state) as the user_data of an asynchronous DNS resolver query. The socket layer waits on a semaphore with a timeout deliberately set slightly longer than the resolver's own per-query timeout. When that semaphore wait nonetheless times out (-EAGAIN) - which can occur when the resolver's timeout work is delayed by workqueue contention, or in the documented multi-retry configuration where CONFIG_NET_SOCKETS_DNS_TIMEOUT exceeds CONFIG_NET_SOCKETS_DNS_BACKOFF_INTERVAL - the pre-fix code retries the query (goto again) without cancelling the previous one and without resetting the semaphore. The previous query slot remains active in the resolver with its callback and the stack pointer as user_data, and ai_state-dns_id is overwritten so the stale query can no longer be cancelled. A subsequent DNS response delivered over UDP and matched by its 16-bit transaction id (in dispatcher_cb()/dns_read()), or the resolver's own delayed query-timeout work, then invokes dns_resolve_cb() against the now out-of-scope stack frame, writing through the stale pointer (state-status, state-idx, state-ai_arr[], and k_sem_give()). Because the triggering response is network-delivered and its 16-bit id is spoofable/replayable by an on- or off-path attacker, this is a network-influenceable use-after-return that can corrupt reused stack memory, leading to crashes/denial of service or memory corruption. The fix cancels the timed-out query by name and type before retrying and resets the local semaphore, eliminating the stale callback path. Affected: Zephyr v4.0.0 through v4.4.0.
+A vulnerability was identified in Wavlink WL-NU516U1-A M16U1_V240425. The impacted element is the function sub_407504 of the file /cgi-bin/wireless.cgi of the component POST Parameter Handler. Such manipulation of the argument Guest_ssid leads to stack-based buffer overflow. The attack can be executed remotely. The exploit is publicly available and might be used. It is suggested to upgrade the affected component. The vendor was contacted early, responded in a very professional manner and quickly released a fixed version of the affected product.
 
-### CVE-2026-58056
+### CVE-2026-13519
 
 | 項目 | 値 |
 |------|-----|
-| CVSS | `7.2` |
-| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
-| Weaknesses | `CWE-863` |
-| Published | 2026-06-28T02:16:32.860 |
+| CVSS | `7.4` |
+| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
+| Weaknesses | `CWE-119;CWE-121` |
+| Published | 2026-06-29T02:16:25.063 |
 
-RustDesk gates incoming control messages on per-capability flags rather than on the session's authorized connection type, and a file-transfer session does not clear those flags. A peer holding only a valid FileTransfer authorization can inject keyboard and mouse input and reach the unguarded screenshot and display-capture handlers, acting outside its granted scope.
+A vulnerability was found in Tenda JD12L 16.03.53.23. This impacts the function fromNatStaticSetting of the file /goform/NatStaticSetting. The manipulation of the argument page results in stack-based buffer overflow. The attack can be executed remotely. The exploit has been made public and could be used.
+
+### CVE-2026-13518
+
+| 項目 | 値 |
+|------|-----|
+| CVSS | `7.4` |
+| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
+| Weaknesses | `CWE-119;CWE-121` |
+| Published | 2026-06-29T01:16:30.683 |
+
+A vulnerability has been found in Tenda JD12L 16.03.53.23. This affects the function fromAddressNat of the file /goform/addressNat. The manipulation of the argument page leads to stack-based buffer overflow. Remote exploitation of the attack is possible. The exploit has been disclosed to the public and may be used.
+
+### CVE-2026-13517
+
+| 項目 | 値 |
+|------|-----|
+| CVSS | `7.4` |
+| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
+| Weaknesses | `CWE-119;CWE-121` |
+| Published | 2026-06-29T01:16:30.517 |
+
+A flaw has been found in Tenda JD12L 16.03.53.23. The impacted element is the function formWifiBasicSet of the file /goform/WifiBasicSet. Executing a manipulation of the argument security_5g can lead to stack-based buffer overflow. The attack may be launched remotely. The exploit has been published and may be used.
+
+### CVE-2026-13516
+
+| 項目 | 値 |
+|------|-----|
+| CVSS | `7.4` |
+| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
+| Weaknesses | `CWE-119;CWE-121` |
+| Published | 2026-06-29T00:16:47.633 |
+
+A vulnerability was detected in Tenda JD12L 16.03.53.23. The affected element is the function fromSetWifiGusetBasic of the file /goform/WifiGuestSet. Performing a manipulation of the argument shareSpeed results in stack-based buffer overflow. The attack may be initiated remotely. The exploit is now public and may be used.
+
+### CVE-2026-13515
+
+| 項目 | 値 |
+|------|-----|
+| CVSS | `7.4` |
+| Vector | `CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X` |
+| Weaknesses | `CWE-119;CWE-121` |
+| Published | 2026-06-29T00:16:47.463 |
+
+A security vulnerability has been detected in Tenda JD12L 16.03.53.23. Impacted is the function formSetPPTPServer of the file /goform/SetPptpServerCfg. Such manipulation of the argument startIp leads to stack-based buffer overflow. The attack can be launched remotely. The exploit has been disclosed publicly and may be used.
